@@ -1,5 +1,7 @@
 <?php
 
+namespace Ares;
+
 class Comment extends Model {
 
 	static $schema = array(

@@ -1,5 +1,7 @@
 <?php
 
+namespace Ares;
+
 class Request {
 
 	static function start() {

@@ -1,5 +1,7 @@
 <?php
 
+namespace Ares;
+
 class Event extends Model {
 
 	static $schema = array(

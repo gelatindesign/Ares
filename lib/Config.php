@@ -1,5 +1,7 @@
 <?php
 
+namespace Ares;
+
 class Config {
 
 	static function load() {

@@ -1,5 +1,7 @@
 <?php
 
+namespace Ares;
+
 class PersonFront extends FrontController {
 
 	function GET_view(int $id) {

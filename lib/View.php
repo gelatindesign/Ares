@@ -1,5 +1,7 @@
 <?php
 
+namespace Ares;
+
 class View {
 
 	static $data = array(),

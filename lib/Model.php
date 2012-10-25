@@ -1,5 +1,7 @@
 <?php
 
+namespace Ares;
+
 class Model {
 
 	static $schema = null,
