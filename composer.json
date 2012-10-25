@@ -1,7 +1,24 @@
 {
 	"name": "gelatindesign/ares",
+	"description": "A small mvc php framework",
+	"homepage": "http://github.com/gelatindesign/Ares",
+
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Laurence Roberts",
+			"email": "info@gelatindesign.co.uk",
+			"role": "Developer"
+		}
+	],
 
 	"require": {
+		"php": ">=5.3.3",
 		"symfony/Yaml": "2.*"
+	},
+
+	"autoload": {
+		"psr-0": { "Ares": ["controllers/", "lib/", "models/"] }
 	}
 }
