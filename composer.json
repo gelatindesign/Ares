@@ -19,6 +19,6 @@
 	},
 
 	"autoload": {
-		"psr-0": { "Ares": "src/" }
+		"psr-0": { "GelatinDesign/Ares": "src/" }
 	}
 }
