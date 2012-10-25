@@ -21,6 +21,9 @@ class Request {
 
 		// Load the config
 		Config::load();
+
+		// Load in the helpers
+		include "../helpers.php";
 	}
 
 }
