@@ -19,6 +19,6 @@
 	},
 
 	"autoload": {
-		"psr-0": { "Ares": ["controllers/", "lib/", "models/"] }
+		"psr-0": { "Ares": "src/" }
 	}
 }
