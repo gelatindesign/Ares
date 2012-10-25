@@ -1,0 +1,7 @@
+{
+	"name": "gelatindesign/ares",
+
+	"require": {
+		"symfony/Yaml": "2.*"
+	}
+}
