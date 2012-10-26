@@ -20,7 +20,7 @@ class Router {
 	static function find($urn=null) {
 
 		// Get the urn
-		$urn = ($urn===null) ? $_SERVER['REQUEST_URI'] : $urn;
+		$urn = ($urn===null) ? Request::urn() : $urn;
 
 		v($urn);
 
