@@ -6,7 +6,7 @@ use Symfony\Component\Yaml;
 
 class Config {
 
-	static $root = null
+	static $root = null,
 	       $env  = null;
 
 	static function load() {
