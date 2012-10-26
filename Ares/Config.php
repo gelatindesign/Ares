@@ -2,7 +2,7 @@
 
 namespace Ares;
 
-use Symfony\Component\Yaml;
+use \Symfony\Component\Yaml as Yaml;
 
 class Config {
 
@@ -15,21 +15,39 @@ class Config {
 
 		// Load config
 		$config_file = self::$root . '/config/config.yml';
-		$config = Yaml::parse($config_file);
 
-		v($config);
+		if (!is_file($config_file)) {
+			throw new Exception\ConfigException("Config not found in '" . $config_file . "'");
+		}
+
+		try {
+			$config = Yaml\Yaml::parse($config_file);
+
+		} catch (Exception $e) {
+			throw new Exception\ConfigException("Config not valid in '" . $config_file . "'", 0, $e);
+		}
 
 		// Load environment
 		foreach ($config['environment'] as $env => $match) {
 			$regex = simpleRegex($match);
 
 			if (preg_match($regex, Request::host())) {
-				self::$env = Yaml::parse(self::$root . '/config/' . $env . '.env.php');
+				$env_file = self::$root . '/config/' . $env . '.env.php';
+
+				if (!is_file($env_file)) {
+					throw new Exception\ConfigException("Environment not found in '" . $env_file . "'");
+				}
+
+				try {
+					self::$env = Yaml\Yaml::parse($env_file);
+				
+				} catch (Exception $e) {
+					throw new Exception\ConfigException("Environment not valid in '" . $env_file . "'", 0, $e);
+				}
+
 				break;
 			}
 		}
-
-		v(self::$env);
 
 	}
 

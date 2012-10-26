@@ -31,7 +31,11 @@ class Request {
 		include __DIR__ . "/../helpers.php";
 
 		// Load the config
-		Config::load();
+		try {
+			Config::load();
+		} catch (Exception $e) {
+			throw $e;
+		}
 	}
 
 }
