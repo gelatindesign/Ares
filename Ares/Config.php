@@ -24,7 +24,7 @@ class Config {
 			$regex = simpleRegex($match);
 
 			if (preg_match($regex, Request::host())) {
-				self::$env = Yaml::parse(self::$root . '/config/' . $env . '.env.php';
+				self::$env = Yaml::parse(self::$root . '/config/' . $env . '.env.php');
 				break;
 			}
 		}
