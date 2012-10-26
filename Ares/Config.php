@@ -6,12 +6,15 @@ use \Symfony\Component\Yaml as Yaml;
 
 class Config {
 
-	static $root = null,
-	       $env  = null;
+	static $root   = null,
+	       $config = null,
+	       $env    = null;
 
 	static function load() {
 
 		if (self::$root == null) return false;
+
+		if (substr(self::$root, -1) != '/') self::$root .= '/';
 
 		// Load config
 		$config_file = self::$root . '/config/config.yml';
@@ -21,14 +24,14 @@ class Config {
 		}
 
 		try {
-			$config = Yaml\Yaml::parse($config_file);
+			self::$config = Yaml\Yaml::parse($config_file);
 
 		} catch (Exception $e) {
 			throw new Exception\ConfigException("Config not valid in '" . $config_file . "'", 0, $e);
 		}
 
 		// Load environment
-		foreach ($config['environment'] as $env => $match) {
+		foreach (self::$config['environment'] as $env => $match) {
 			$regex = simpleRegex($match);
 
 			if (preg_match($regex, Request::host()) !== false) {
