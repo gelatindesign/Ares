@@ -17,10 +17,10 @@ function v() {
 function simpleRegex($string) {
 
 	// %+ => .+
-	$string = str_replace('%+', '.+', $string);
+	$string = str_replace('%+', '(.+)', $string);
 
 	// % => .*
-	$string = str_replace('%', '.*', $string);
+	$string = str_replace('%', '(.*)', $string);
 
 	// :string => [A-Za-z_\-]+
 

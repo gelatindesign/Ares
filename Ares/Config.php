@@ -31,7 +31,7 @@ class Config {
 		foreach ($config['environment'] as $env => $match) {
 			$regex = simpleRegex($match);
 
-			if (preg_match($regex, Request::host())) {
+			if (preg_match($regex, Request::host()) !== false) {
 				$env_file = self::$root . '/config/' . $env . '.env.php';
 
 				if (!is_file($env_file)) {
