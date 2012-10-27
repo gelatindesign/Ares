@@ -17,7 +17,7 @@ class Config {
 		if (substr(self::$root, -1) != '/') self::$root .= '/';
 
 		// Load config
-		$config_file = self::$root . '/config/config.yml';
+		$config_file = self::$root . 'config/config.yml';
 
 		if (!is_file($config_file)) {
 			throw new Exception\ConfigException(
@@ -37,7 +37,7 @@ class Config {
 			$regex = simpleRegex($match);
 
 			if (preg_match($regex, Request::host()) !== false) {
-				$env_file = self::$root . '/config/' . $env . '.env.php';
+				$env_file = self::$root . 'config/' . $env . '.env.yml';
 
 				if (!is_file($env_file)) {
 					throw new Exception\ConfigException
