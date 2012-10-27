@@ -12,6 +12,17 @@ class Request {
 		return $_SERVER['REQUEST_URI'];
 	}
 
+	static function method() {
+		$methods = array('GET', 'POST', 'PUT', 'DELETE');
+		$method = strtoupper($_SERVER['REQUEST_METHOD']);
+
+		if (!in_array($method)) {
+			throw new Exception\RequestException("Request method '".$method.'" invalid');
+		}
+
+		return $method;
+	}
+
 	static function start() {
 
 		// Create the session

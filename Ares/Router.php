@@ -107,7 +107,12 @@ class Router {
 			$instance = Singleton::get($class);
 
 			// Prepend the method with 'GET_' or 'POST_'
-			$request_method = Request::method() . '_' . $method;
+			try {
+				$request_method = Request::method() . '_' . $method;
+			} catch (Exception $e) {
+				echo $e->getMessage();
+				exit;
+			}
 
 			// Check the request method exists
 			if (method_exists($instance, $request_method)) {
