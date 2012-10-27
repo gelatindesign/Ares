@@ -2,6 +2,6 @@
 
 namespace Ares;
 
-class FrontController {
+class FrontController extends Controller {
 	
 }
