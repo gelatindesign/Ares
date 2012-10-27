@@ -20,14 +20,16 @@ class Config {
 		$config_file = self::$root . '/config/config.yml';
 
 		if (!is_file($config_file)) {
-			throw new Exception\ConfigException("Config not found in '" . $config_file . "'");
+			throw new Exception\ConfigException(
+				"Config not found in '" . $config_file . "'");
 		}
 
 		try {
 			self::$config = Yaml\Yaml::parse($config_file);
 
 		} catch (Exception $e) {
-			throw new Exception\ConfigException("Config not valid in '" . $config_file . "'", 0, $e);
+			throw new Exception\ConfigException(
+				"Config not valid in '" . $config_file . "'", 0, $e);
 		}
 
 		// Load environment
@@ -38,14 +40,16 @@ class Config {
 				$env_file = self::$root . '/config/' . $env . '.env.php';
 
 				if (!is_file($env_file)) {
-					throw new Exception\ConfigException("Environment not found in '" . $env_file . "'");
+					throw new Exception\ConfigException
+					("Environment not found in '" . $env_file . "'");
 				}
 
 				try {
 					self::$env = Yaml\Yaml::parse($env_file);
 				
 				} catch (Exception $e) {
-					throw new Exception\ConfigException("Environment not valid in '" . $env_file . "'", 0, $e);
+					throw new Exception\ConfigException(
+						"Environment not valid in '" . $env_file . "'", 0, $e);
 				}
 
 				break;

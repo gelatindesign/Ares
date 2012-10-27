@@ -26,5 +26,5 @@ function simpleRegex($string) {
 
 	// :number => [0-9]+
 
-	return $string;
+	return '~' . $string . '~';
 }
