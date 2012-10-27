@@ -36,14 +36,17 @@ class Router {
 	 */
 	static function find($urn=null) {
 
+		// Create controller & method
+		$controller = $method = '';
+
 		// Ensure the config has been loaded
 		self::load();
 
 		// Get the urn
-		$urn = ($urn===null) ? Request::urn() : $urn;
+		$urn = ($urn === null) ? Request::urn() : $urn;
 
-		// Remove the preceding slash
-		$urn = (substr($urn, 0, 1) == '/') ? substr($urn, 1) : $urn;
+		// Remove the preceding slash, cast as string to prevent false
+		$urn = (substr($urn, 0, 1) == '/') ? (string) substr($urn, 1) : (string) $urn;
 
 		// Get the controller & method parts
 		if (strpos($urn, '/') !== false) {
@@ -59,8 +62,6 @@ class Router {
 			$method = 'index';
 		}
 
-		p($controller, $route);
-
 		// Check routes
 		if (self::$routes !== null) {
 
@@ -68,10 +69,10 @@ class Router {
 			foreach (self::$routes as $route_controller => $route_path) {
 
 				// Check for a match
-				if ($route_controller == $controller) {
+				if ($route_path == $controller) {
 
 					// Run the method
-					self::sendTo($controller, $method);
+					self::sendTo($route_controller, $method);
 				}
 			}
 		}
@@ -95,8 +96,6 @@ class Router {
 	}
 
 	static function sendTo($controller, $method) {
-		p($controller, $method);
-
 		try {
 			$instance = new $controller;
 			return self::HTTP_200;

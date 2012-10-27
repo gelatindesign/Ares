@@ -65,7 +65,7 @@ class Model {
 				// Look for ->plural
 				$plural = (isset(self::$plural)) ? self::$plural : $class.'s';
 
-				if (isset(self::$relations[$relation])
+				//if (isset(self::$relations[$relation])
 			}
 
 			return $this->$name;
