@@ -4,14 +4,32 @@ namespace Ares;
 
 class Model {
 
-	static $schema = null,
+	public $attributes = null,
+	       $changes    = null;
+
+	static $table     = null,
+	       $schema    = null,
 	       $relations = null;
 
 	const ONE_TO_ONE   = 1,
 	      ONE_TO_MANY  = 2,
 	      MANY_TO_MANY = 3;
 
+	function __construct($data) {
+		$data = $this->filterInSchema($data);
+		$this->changes = $data;
+	}
+
+	static function find() {
+		if (self::$table === null) {
+			throw new Exception\ModelException("No table defined for model '".get_class(self)."'");
+		}
+		return new ActiveRecord(self::$table);
+	}
+
 	function __get($name) {
+
+
 
 		if (self::$relations) {
 
