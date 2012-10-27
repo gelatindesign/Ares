@@ -6,9 +6,10 @@ use \Symfony\Component\Yaml as Yaml;
 
 class Config {
 
-	static $root   = null,
-	       $config = null,
-	       $env    = null;
+	static $root     = null,
+	       $config   = null,
+	       $env      = null,
+	       $ctlr_ext = '';
 
 	static function load() {
 

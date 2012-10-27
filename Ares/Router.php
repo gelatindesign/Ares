@@ -92,12 +92,13 @@ class Router {
 		}
 
 		return self::HTTP_404;
-
 	}
 
 	static function sendTo($controller, $method) {
+		$class = $controller . Config::$ctlr_ext;
+
 		try {
-			$instance = new $controller;
+			$instance = new $class;
 			return self::HTTP_200;
 
 		} catch (Exception $e) {
