@@ -4,9 +4,9 @@ namespace Ares;
 
 class Singleton {
 
-	private $loaded = array();
+	private static $loaded = array();
 
-	function get($name) {
+	static function get($name) {
 		if (!isset(self::$loaded[$name])) {
 			$instance = new $name;
 			self::$loaded[$name] = $instance;
