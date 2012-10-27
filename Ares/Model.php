@@ -22,14 +22,31 @@ class Model {
 
 	static function find() {
 		if (self::$table === null) {
-			throw new Exception\ModelException("No table defined for model '".get_class(self)."'");
+			throw new Exception\ModelException("No table defined for model '".get_called_class()."'");
 		}
 		return new ActiveRecord(self::$table);
 	}
 
+	function __set($name, $value) {
+		if (isset($this->schema[$name])) {
+			$this->changes[$name] = $value;
+		} else {
+			$this->$name = $value;
+		}
+	}
+
 	function __get($name) {
+		if (isset($this->changes[$name])) {
+			return $this->changes[$name];
+		}
 
+		if (isset($this->attributes[$name])) {
+			return $this->attributes[$name];
+		}
 
+		if (isset($this->$name)) {
+			return $this->$name;
+		}
 
 		if (self::$relations) {
 
