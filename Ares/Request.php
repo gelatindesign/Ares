@@ -16,8 +16,8 @@ class Request {
 		$methods = array('GET', 'POST', 'PUT', 'DELETE');
 		$method = strtoupper($_SERVER['REQUEST_METHOD']);
 
-		if (!in_array($method)) {
-			throw new Exception\RequestException("Request method '".$method.'" invalid');
+		if (!in_array($method, $methods)) {
+			throw new Exception\RequestException("Request method '".$method."' invalid");
 		}
 
 		return $method;
