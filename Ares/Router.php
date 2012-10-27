@@ -16,16 +16,15 @@ class Router {
 	       $controllers = null;
 
 	static function load() {
+
+		// Prevent the config from being loaded more than once
 		if (!self::$_loaded) {
 
 			// Set environment routes
 			Router::$routes = Config::$config['routes'];
 
-			p(Config::$config);
-
 			// Get controller references
 			$files = glob(Config::$root . Config::$config['paths']['controllers'] . '*.php');
-			p($files);
 		}
 	}
 
@@ -36,6 +35,8 @@ class Router {
 	 * @return int
 	 */
 	static function find($urn=null) {
+
+		// Ensure the config has been loaded
 		self::load();
 
 		// Get the urn
@@ -45,11 +46,20 @@ class Router {
 		$urn = (substr($urn, 0, 1) == '/') ? substr($urn, 1) : $urn;
 
 		// Get the controller & method parts
-		list($controller, $method) = explode("/", $urn);
+		if (strpos($urn, '/') !== false) {
+			list($controller, $method) = explode("/", $urn);
 
+		// If a single part urn, just set the controller as that
+		} else {
+			$controller = $urn;
+		}
+		
+		// Set the default method to 'index' if none set
 		if ($method == '') {
 			$method = 'index';
 		}
+
+		p($controller, $route);
 
 		// Check routes
 		if (self::$routes !== null) {
@@ -85,6 +95,8 @@ class Router {
 	}
 
 	static function sendTo($controller, $method) {
+		p($controller, $method);
+
 		try {
 			$instance = new $controller;
 			return self::HTTP_200;
