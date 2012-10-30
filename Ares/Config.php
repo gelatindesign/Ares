@@ -9,6 +9,7 @@ class Config {
 	static $root     = null,
 	       $config   = null,
 	       $env      = null,
+	       $envvars  = null,
 	       $ctlr_ext = '';
 
 	static function load() {
@@ -38,6 +39,8 @@ class Config {
 			$regex = simpleRegex($match);
 
 			if (preg_match($regex, Request::host()) !== false) {
+				self::$env = $env;
+				
 				$env_file = self::$root . 'config/' . $env . '.env.yml';
 
 				if (!is_file($env_file)) {
@@ -46,7 +49,7 @@ class Config {
 				}
 
 				try {
-					self::$env = Yaml\Yaml::parse($env_file);
+					self::$envvars = Yaml\Yaml::parse($env_file);
 				
 				} catch (Exception $e) {
 					throw new Exception\ConfigException(

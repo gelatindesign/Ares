@@ -11,8 +11,17 @@ class ActiveRecord {
 	        $limit  = '',
 	        $params = array();
 
-	function __construct($table) {
-		$this->table = $table;
+	function __construct($model) {
+		if (Config::$env != 'production') {
+			try {
+				// Create the table if it does not exist
+				Database::checkTable($model);
+
+			} catch (Exception $e) {
+				echo $e->getMessage();
+				exit;
+			}
+		}
 	}
 
 	/**

@@ -21,10 +21,10 @@ class Model {
 	}
 
 	static function find() {
-		if (self::$table === null) {
-			throw new Exception\ModelException("No table defined for model '".get_called_class()."'");
-		}
-		return new ActiveRecord(self::$table);
+		// if (self::$table === null) {
+		// 	throw new Exception\ModelException("No table defined for model '".get_called_class()."'");
+		// }
+		return new ActiveRecord(self);
 	}
 
 	function __set($name, $value) {
